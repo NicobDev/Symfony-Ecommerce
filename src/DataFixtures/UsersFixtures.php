@@ -18,6 +18,7 @@ class UsersFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+        $faker = Faker\Factory::create('fr_FR');
         $admin = new Users();
         $admin->setEmail('admin@demo.fr');
         $admin->setLastname('Gambier');
@@ -25,6 +26,7 @@ class UsersFixtures extends Fixture
         $admin->setAddress('12 rue du port');
         $admin->setZipcode('75001');
         $admin->setCity('Paris');
+        $admin->setTelephone($faker->phoneNumber);
         $admin->setPassword(
             $this->passwordEncoder->hashPassword($admin, 'admin')
         );
@@ -32,7 +34,6 @@ class UsersFixtures extends Fixture
 
         $manager->persist($admin);
 
-        $faker = Faker\Factory::create('fr_FR');
 
         for($usr = 1; $usr <= 5; $usr++){
             $user = new Users();
@@ -42,6 +43,7 @@ class UsersFixtures extends Fixture
             $user->setAddress($faker->streetAddress);
             $user->setZipcode(str_replace(' ', '', $faker->postcode));
             $user->setCity($faker->city);
+            $user->setTelephone($faker->phoneNumber);
             $user->setPassword(
                 $this->passwordEncoder->hashPassword($user, 'secret')
             );

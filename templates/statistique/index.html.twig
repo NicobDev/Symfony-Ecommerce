@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistique{% endblock %}
+
+{% block body %}
+    <main class="container">
+        <section class="row">
+            <div class="col-12">
+                <h1>Catégories</h1>            
+            </div>
+            {% for category in categories %}
+                {% if category.parent != null %}
+                    <div class="col-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h3 class="card-title">{{ category.name }}</h3>
+                                <a href="{{ path('categories_list', {slug: category.slug}) }}" class="btn btn-primary">Voir les produits</a>
+                            </div>
+                        </div>
+                    </div>    
+                {% endif %}
+            {% endfor %}
+        </section>
+        <section class="row">
+            <div class="col-12">
+                <h1>Liste des produits en dessous de 50€</h1>
+            </div>
+            {% for product in products %}
+                <div class="col-3 mb-3">
+                    <article class="card h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">{{ product.name }}</h2>
+                            <p class="card-text">{{ product.description }}</p>
+                            <a href="{{ path('products_details', {"slug": product.slug }) }}" class="btn btn-primary">Voir les détails</a>
+                        </div>
+                    </article>
+                </div>
+            {% endfor %}
+        </section>
+        <section class="row">
+            <div class="col-12">
+                <h1>Liste des Ecrans</h1>
+            </div>
+            {% for product in produitecran %}
+                <div class="col-3 mb-3">
+                    <article class="card h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">{{ product.name }}</h2>
+                            <p class="card-text">{{ product.description }}</p>
+                            <a href="{{ path('products_details', {"slug": product.slug }) }}" class="btn btn-primary">Voir les détails</a>
+                        </div>
+                    </article>
+                </div>
+            {% endfor %}
+        </section>
+    </main>
+{% endblock %}

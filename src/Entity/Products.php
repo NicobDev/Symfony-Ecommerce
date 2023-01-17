@@ -32,6 +32,9 @@ class Products
     #[ORM\Column(type: 'integer')]
     private $stock;
 
+    #[ORM\Column(type: 'integer')]
+    private $weight;
+
     #[ORM\ManyToOne(targetEntity: Categories::class, inversedBy: 'products')]
     #[ORM\JoinColumn(nullable: false)]
     private $categories;
@@ -98,6 +101,18 @@ class Products
     public function setStock(int $stock): self
     {
         $this->stock = $stock;
+
+        return $this;
+    }
+
+    public function getWeight(): ?int
+    {
+        return $this->weight;
+    }
+
+    public function setWeight(int $weight): self
+    {
+        $this->weight = $weight;
 
         return $this;
     }

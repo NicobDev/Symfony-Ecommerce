@@ -14,6 +14,22 @@ class ProductsFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+        
+        $product = new Products();
+        $product->setName('Optix MAG301CR2');
+        $product->setDescription('écran gaming MSI Optix MAG301CR2 est doté d une dalle VA incurvée de 29.5 pouces avec résolution WFHD pour vous transporter au coeur de l action. Découvrez des perfo');
+        $product->setSlug('PB00383111');
+        $product->setPrice('37900');
+        $product->setStock('9');
+        $product->setWeight('7');
+
+        //On va chercher une référence de catégorie
+        $category = $this->getReference('cat-3');
+        $product->setCategories($category);
+
+        $this->setReference('prod-667', $product);
+        $manager->persist($product);
+        
         // use the factory to create a Faker\Generator instance
         $faker = Faker\Factory::create('fr_FR');
 
@@ -24,6 +40,7 @@ class ProductsFixtures extends Fixture
             $product->setSlug($this->slugger->slug($product->getName())->lower());
             $product->setPrice($faker->numberBetween(900, 150000));
             $product->setStock($faker->numberBetween(0, 10));
+            $product->setWeight($faker->numberBetween(0, 100));
 
             //On va chercher une référence de catégorie
             $category = $this->getReference('cat-'. rand(1, 8));
